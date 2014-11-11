@@ -19,6 +19,7 @@ import System.Environment (getEnv)
 -- | Configuration type for PastePipe:
 data Config = Config { userName :: String
                      , language :: String
+                     , channel :: String
                      , title :: String
                      , uri :: String
                      , test :: Bool }
@@ -33,6 +34,11 @@ config realUser = Config { userName = realUser
                          , language = "haskell"
                                 &= help "The language used for syntax highlighting"
                                 &= typ "LANGUAGE"
+                         , channel = ""
+                                &= help "#channel to post your snippet. The lpaste bot will not post the message if you do not set --title=TITLE and --user=<YOUR NICK>"
+                                &= typ "#channel-name"
+                                &= name "channel"
+                                &= name "c"
                          , title = ""
                                 &= help "The title of the snippet"
                                 &= typ "TITLE"
@@ -88,7 +94,7 @@ buildRequest conf str = formToRequest $ Form POST (saveUri $ uri conf)
                              , ("author", userName conf)
                              , ("paste", str)
                              , ("language", language conf)
-                             , ("channel", "")
+                             , ("channel", channel conf)
                              , ("email", "")
                              ]
 
@@ -97,6 +103,7 @@ fakePost conf str = do
   putStrLn $ "uri: "++uri conf
   putStrLn $ "user: "++userName conf
   putStrLn $ "lang: "++language conf
+  putStrLn $ "chan: "++channel conf
   putStrLn $ "title: "++title conf
   putStrLn $ "content: "++str
   return $ fromJust $ parseURI $ uri conf
