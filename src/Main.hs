@@ -6,7 +6,7 @@
 --
 -- Entry point for the executable, using "Utils.PastePipe".
 --
--- A CLI for lpaste.org.
+-- A CLI for lpaste.net
 --
 --  Authored by Rogan Creswick (creswick_at_googles_mail_service.)
 --

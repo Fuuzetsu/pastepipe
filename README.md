@@ -1,6 +1,6 @@
-# A CLI for lpaste.net.
+# A CLI for lpaste.net
 
-Pastepipe reads from stdin, posting to hpaste, and prints out the resulting url (the last line of output). Parameters control various hpaste form fields:
+Pastepipe reads from stdin, posting to lpaste, and prints out the resulting url (the last line of output). Parameters control various hpaste form fields:
 
 ```
 $ pastepipe --help
