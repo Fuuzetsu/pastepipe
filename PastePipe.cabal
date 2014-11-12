@@ -1,5 +1,5 @@
 name:                PastePipe
-version:             1.6
+version:             1.7
 synopsis:            CLI for pasting to lpaste.net
 description:         PastePipe reads from standard in and posts to <lpaste.net>.
                      It will auto-detect your username, but that can be
