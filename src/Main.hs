@@ -1,7 +1,7 @@
 -- |
 -- Module      :  Main
 -- Copyright   :  (c) Ragon Creswick, 2009-2012
---                    Mateusz Kowalczyk, 2014
+--                    Mateusz Kowalczyk, 2014-2015
 -- License     :  GPL-3
 --
 -- Entry point for the executable, using "Utils.PastePipe".

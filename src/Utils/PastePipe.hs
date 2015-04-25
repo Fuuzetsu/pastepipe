@@ -2,7 +2,7 @@
 -- |
 -- Module      :  Utils.PastePipe
 -- Copyright   :  (c) Ragon Creswick, 2009-2012
---                    Mateusz Kowalczyk, 2014
+--                    Mateusz Kowalczyk, 2014-2015
 -- License     :  GPL-3
 --
 -- Configuration and communication with lpaste.net
@@ -22,7 +22,9 @@ data Config = Config { userName :: String
                      , channel :: String
                      , title :: String
                      , uri :: String
-                     , test :: Bool }
+                     , private :: Bool
+                     , test :: Bool
+                     }
               deriving (Show, Data, Typeable)
 
 config :: String -> Config
@@ -48,10 +50,12 @@ config realUser = Config { userName = realUser
                          , uri = defaultUri
                                 &= help "The URI of the lpaste instance to post to"
                                 &= typ "URL"
+                         , private = False
+                                &= help "Make this a private snippet, off by default"
                          , test = False
                                 &= help "Prevents PastePipe from actually posting content, just echos the configuration and input"
                          }
-                         &= summary "PastePipe v1.3, (C) Rogan Creswick 2009"
+                         &= summary "PastePipe v1.3, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015"
                          &= program "pastepipe"
 
 -- | Takes a string to post to the default and returns the URI.
@@ -87,6 +91,11 @@ post conf str = do
                   request $ buildRequest conf str
   return url
 
+-- |
+mkPrivatePair :: Config -> (String, String)
+mkPrivatePair conf | private conf = ("private", "Private")
+                   | otherwise = ("public", "Public")
+
 -- | Creates the request to post a chunk of content.
 buildRequest :: Config -> String -> Request String
 buildRequest conf str = formToRequest $ Form POST (saveUri $ uri conf)
@@ -95,6 +104,7 @@ buildRequest conf str = formToRequest $ Form POST (saveUri $ uri conf)
                              , ("paste", str)
                              , ("language", language conf)
                              , ("channel", channel conf)
+                             , mkPrivatePair conf
                              , ("email", "")
                              ]
 
@@ -106,4 +116,5 @@ fakePost conf str = do
   putStrLn $ "chan: "++channel conf
   putStrLn $ "title: "++title conf
   putStrLn $ "content: "++str
+  putStrLn $ (\(p, p') -> p ++ ":" ++ p') (mkPrivatePair conf)
   return $ fromJust $ parseURI $ uri conf
