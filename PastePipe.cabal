@@ -25,3 +25,7 @@ library
   hs-source-dirs:    src
   exposed-modules:   Utils.PastePipe
   Build-Depends:     base >= 4 && < 5, HTTP, network, cmdargs, network-uri
+
+source-repository head
+  type:     git
+  location: https://github.com/Fuuzetsu/PastePipe.git
