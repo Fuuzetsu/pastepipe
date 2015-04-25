@@ -57,7 +57,7 @@ config realUser = Config
  , test = False
               &= help "Prevents PastePipe from actually posting content, just echos the configuration and input"
  }
- &= summary "PastePipe v1.3, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015"
+ &= summary "PastePipe v1.8, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015"
  &= program "pastepipe"
 
 -- | Takes a string to post to the default and returns the URI.

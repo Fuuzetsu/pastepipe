@@ -1,22 +1,29 @@
 # A CLI for lpaste.net
 
-Pastepipe reads from stdin, posting to lpaste, and prints out the resulting url (the last line of output). Parameters control various hpaste form fields:
+Pastepipe reads from stdin, posting to lpaste, and prints out the
+resulting url (the last line of output). Parameters control various
+hpaste form fields:
 
 ```
 $ pastepipe --help
-PastePipe v1.4, (C) Rogan Creswick 2009--2012
+PastePipe v1.8, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015
 
-pastepipe [FLAG]
+pastepipe [OPTIONS]
 
-  -? --help[=FORMAT]      Show usage information (optional format)
-  -V --version            Show version information
-  -v --verbose            Higher verbosity
-  -q --quiet              Lower verbosity
-  --user=USER             Your user name (default is taken from $USER)
-  -l --language=LANGUAGE  The language used for syntax highlighting (default=haskell)
-  -t --title=TITLE        The title of the snippet
-  -u --uri=URL            The URI of the lpaste instance to post to (default=http://lpaste.net/)
-     --test               Prevents PastePipe from actually posting content, just echos the configuration and input
+Common flags:
+     --user=USER              Your user name
+  -l --language=LANGUAGE      The language used for syntax highlighting
+  -c --channel=#channel-name  #channel to post your snippet. The lpaste bot
+                              will not post the message if you do not set
+                              --title=TITLE and --user=<YOUR NICK>
+  -t --title=TITLE            The title of the snippet
+  -u --uri=URL                The URI of the lpaste instance to post to
+  -p --private                Make this a private snippet, off by default
+     --test                   Prevents PastePipe from actually posting
+                              content, just echos the configuration and input
+  -? --help                   Display help message
+  -V --version                Print version information
+     --numeric-version        Print just the version number
 ```
 
 It will auto-detect your local username, but --user overrides this detection.
