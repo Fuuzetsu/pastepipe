@@ -28,35 +28,36 @@ data Config = Config { userName :: String
               deriving (Show, Data, Typeable)
 
 config :: String -> Config
-config realUser = Config { userName = realUser
-                                &= help "Your user name"
-                                &= typ "USER"
-                                &= explicit
-                                &= name "user"
-                         , language = "haskell"
-                                &= help "The language used for syntax highlighting"
-                                &= typ "LANGUAGE"
-                         , channel = ""
-                                &= help "#channel to post your snippet. The lpaste bot will not post the message if you do not set --title=TITLE and --user=<YOUR NICK>"
-                                &= typ "#channel-name"
-                                &= name "channel"
-                                &= name "c"
-                         , title = ""
-                                &= help "The title of the snippet"
-                                &= typ "TITLE"
-                                &= explicit
-                                &= name "title"
-                                &= name "t"
-                         , uri = defaultUri
-                                &= help "The URI of the lpaste instance to post to"
-                                &= typ "URL"
-                         , private = False
-                                &= help "Make this a private snippet, off by default"
-                         , test = False
-                                &= help "Prevents PastePipe from actually posting content, just echos the configuration and input"
-                         }
-                         &= summary "PastePipe v1.3, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015"
-                         &= program "pastepipe"
+config realUser = Config
+ { userName = realUser
+              &= help "Your user name"
+              &= typ "USER"
+              &= explicit
+              &= name "user"
+ , language = "haskell"
+              &= help "The language used for syntax highlighting"
+              &= typ "LANGUAGE"
+ , channel = ""
+              &= help "#channel to post your snippet. The lpaste bot will not post the message if you do not set --title=TITLE and --user=<YOUR NICK>"
+              &= typ "#channel-name"
+              &= name "channel"
+              &= name "c"
+ , title = ""
+              &= help "The title of the snippet"
+              &= typ "TITLE"
+              &= explicit
+              &= name "title"
+              &= name "t"
+ , uri = defaultUri
+              &= help "The URI of the lpaste instance to post to"
+              &= typ "URL"
+ , private = False
+              &= help "Make this a private snippet, off by default"
+ , test = False
+              &= help "Prevents PastePipe from actually posting content, just echos the configuration and input"
+ }
+ &= summary "PastePipe v1.3, (C) Rogan Creswick 2009-2012, (C) Mateusz Kowalczyk 2014-2015"
+ &= program "pastepipe"
 
 -- | Takes a string to post to the default and returns the URI.
 -- Client code is expected to catch any exceptions.
