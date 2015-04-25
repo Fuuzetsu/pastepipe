@@ -27,6 +27,7 @@ data Config = Config { userName :: String
                      }
               deriving (Show, Data, Typeable)
 
+-- | Default config builder
 config :: String -> Config
 config realUser = Config
  { userName = realUser
@@ -92,7 +93,7 @@ post conf str = do
                   request $ buildRequest conf str
   return url
 
--- |
+-- | Make a pair suitable for encoding out of 'private' setting.
 mkPrivatePair :: Config -> (String, String)
 mkPrivatePair conf | private conf = ("private", "Private")
                    | otherwise = ("public", "Public")
@@ -109,6 +110,8 @@ buildRequest conf str = formToRequest $ Form POST (saveUri $ uri conf)
                              , ("email", "")
                              ]
 
+-- | Just print out the fields and the 'URI' that we would have used
+-- if we ran with the given 'Config'.
 fakePost ::  Config -> String -> IO URI
 fakePost conf str = do
   putStrLn $ "uri: "++uri conf
